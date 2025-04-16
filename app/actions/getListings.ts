@@ -77,20 +77,55 @@ export default async function getListings(
       }
     }
 
-    const listings = await prisma.listing.findMany({
-      where: query,
-      orderBy: {
-        createdAt: 'desc'
-      }
-    });
+    // التحقق من اتصال قاعدة البيانات قبل تنفيذ الاستعلام
+    try {
+      await prisma.$connect();
+      console.log('Connected to database in getListings');
+    } catch (connectionError) {
+      console.error('Failed to connect to database:', connectionError);
+      throw new Error('فشل الاتصال بقاعدة البيانات');
+    }
 
-    const safeListings = listings.map((listing) => ({
+    // محاولة تنفيذ الاستعلام مع وضع حد زمني
+    const listings = await Promise.race([
+      prisma.listing.findMany({
+        where: query,
+        orderBy: {
+          createdAt: 'desc'
+        }
+      }),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('تجاوز وقت الاتصال بقاعدة البيانات')), 10000)
+      )
+    ]) as any;
+
+    if (!listings || !Array.isArray(listings)) {
+      console.error('No listings returned or invalid response format');
+      return []; // Return empty array instead of throwing error
+    }
+
+    const safeListings = listings.map((listing: any) => ({
       ...listing,
       createdAt: listing.createdAt.toISOString(),
     }));
 
     return safeListings;
   } catch (error: any) {
-    throw new Error(error);
+    console.error('Error in getListings:', error);
+    if (error.code === 'P1001' || error.message?.includes('connect')) {
+      throw new Error('فشل الاتصال بقاعدة البيانات. يرجى التحقق من إعدادات الاتصال.');
+    } else if (error.code === 'P2025') {
+      console.log('No data found - returning empty array');
+      return []; // Return empty array for "not found" errors
+    } else {
+      throw new Error('حدث خطأ أثناء جلب البيانات: ' + (error.message || 'خطأ غير معروف'));
+    }
+  } finally {
+    // إغلاق الاتصال بقاعدة البيانات
+    try {
+      await prisma.$disconnect();
+    } catch (disconnectError) {
+      console.error('Error disconnecting from database:', disconnectError);
+    }
   }
 }

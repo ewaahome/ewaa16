@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from 'date-fns';
@@ -15,7 +14,7 @@ import {
 
 import HeartButton from "../HeartButton";
 import Button from "../Button";
-import ClientOnly from "../ClientOnly";
+import PropertyImage from "../PropertyImage";
 
 // قاموس ترجمة فئات العقارات
 const categoryTranslations: { [key: string]: string } = {
@@ -115,7 +114,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             rounded-xl
           "
         >
-          <Image
+          <PropertyImage
             fill
             className="
               object-cover 
@@ -125,14 +124,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
               transition
             "
             src={data.imageSrc || '/images/placeholder.jpg'}
-            alt="Listing"
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AKYH/9k="
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.onerror = null;
-              target.src = '/images/placeholder.jpg';
-            }}
+            alt={data.title || 'Listing'}
+            priority
           />
           <div className="
             absolute

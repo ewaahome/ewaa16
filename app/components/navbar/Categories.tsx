@@ -11,6 +11,7 @@ import {
 import { FaHotel, FaHome } from 'react-icons/fa';
 import { BiBuildingHouse } from 'react-icons/bi';
 import { MdApartment, MdOutlineVilla, MdOutlineCabin } from 'react-icons/md';
+import { useState } from 'react';
 
 import CategoryBox from "../CategoryBox";
 import Container from '../Container';
@@ -79,9 +80,21 @@ const Categories = () => {
   const category = params?.get('category');
   const pathname = usePathname();
   const isMainPage = pathname === '/';
+  const [isLoading, setIsLoading] = useState(false);
 
   if (!isMainPage) {
     return null;
+  }
+
+  // Add error handling if categories fails to load
+  if (isLoading) {
+    return (
+      <Container>
+        <div className="pt-4 pb-4 flex flex-col items-center">
+          <div className="text-neutral-500">جاري تحميل التصنيفات...</div>
+        </div>
+      </Container>
+    );
   }
 
   return (
@@ -102,14 +115,20 @@ const Categories = () => {
           overflow-x-auto
         "
       >
-        {categories.map((item) => (
-          <CategoryBox 
-            key={item.label}
-            label={item.label}
-            icon={item.icon}
-            selected={category === item.label}
-          />
-        ))}
+        {categories.length > 0 ? (
+          categories.map((item) => (
+            <CategoryBox 
+              key={item.label}
+              label={item.label}
+              icon={item.icon}
+              selected={category === item.label}
+            />
+          ))
+        ) : (
+          <div className="text-center text-neutral-500">
+            لا توجد تصنيفات متاحة حالياً
+          </div>
+        )}
       </div>
     </Container>
   );

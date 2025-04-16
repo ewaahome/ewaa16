@@ -101,20 +101,23 @@ const RentModal = () => {
     
     setIsLoading(true);
 
-    if (data.imageSrc && data.imageSrc.startsWith('blob:')) {
-      data.imageSrc = 'https://res.cloudinary.com/dzwkeydij/image/upload/v1701876720/property_images/default_property_image.jpg';
+    if (!data.imageSrc || !data.imageSrc.startsWith('https://res.cloudinary.com')) {
+      toast.error('الرجاء إضافة صورة صالحة للعقار');
+      setIsLoading(false);
+      return;
     }
 
     axios.post('/api/listings', data)
     .then(() => {
-      toast.success('تم إنشاء القائمة بنجاح!');
+      toast.success('تم إنشاء العقار بنجاح!');
       router.refresh();
       reset();
       setStep(STEPS.CATEGORY)
       rentModal.onClose();
     })
-    .catch(() => {
-      toast.error('حدث خطأ ما.');
+    .catch((error) => {
+      console.error('Error creating listing:', error);
+      toast.error('حدث خطأ أثناء إنشاء العقار. الرجاء المحاولة مرة أخرى.');
     })
     .finally(() => {
       setIsLoading(false);

@@ -1,12 +1,11 @@
 'use client';
 
-import Image from "next/image";
-
 import useCountries from "@/app/hooks/useCountries";
 import { SafeUser } from "@/app/types";
 
 import Heading from "../Heading";
 import HeartButton from "../HeartButton";
+import PropertyImage from "../PropertyImage";
 
 interface ListingHeadProps {
   title: string;
@@ -41,16 +40,12 @@ const ListingHead: React.FC<ListingHeadProps> = ({
           relative
         "
       >
-        <Image
-          src={imageSrc || '/images/placeholder.jpg'}
+        <PropertyImage
+          src={imageSrc}
           fill
           className="object-cover w-full"
-          alt="Image"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.onerror = null;
-            target.src = '/images/placeholder.jpg';
-          }}
+          alt={title || "Property image"}
+          priority
         />
         <div
           className="

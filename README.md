@@ -207,3 +207,105 @@ Running commands with npm `npm run [command]`
 | command         | description                              |
 | :-------------- | :--------------------------------------- |
 | `dev`           | Starts a development instance of the app |
+
+# Airbnb Clone - Next.js Project
+
+This is a full-featured Airbnb clone built with Next.js, Prisma, MongoDB, and TypeScript.
+
+## Deploying to Netlify
+
+### Automatic Deployment
+
+1. Fork this repository to your GitHub account
+2. Connect your GitHub account to Netlify
+3. Create a new site from Git in Netlify, selecting the forked repository
+4. Configure the following environment variables in Netlify:
+   - `DATABASE_URL`: Your MongoDB connection string
+   - `NEXTAUTH_SECRET`: A secure random string for NextAuth.js
+   - `NEXTAUTH_URL`: The URL of your Netlify deployment (e.g., https://your-site.netlify.app)
+   - `GITHUB_ID`: GitHub OAuth client ID
+   - `GITHUB_SECRET`: GitHub OAuth client secret
+   - `GOOGLE_CLIENT_ID`: Google OAuth client ID
+   - `GOOGLE_CLIENT_SECRET`: Google OAuth client secret
+   - `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`: Your Cloudinary cloud name
+
+5. Deploy your site with the default settings (Netlify will use the `netlify.toml` configuration)
+
+### Manual Deployment
+
+```bash
+# Install dependencies
+npm install
+
+# Generate Prisma client
+npx prisma generate
+
+# Build the project
+npm run build
+
+# Deploy to Netlify
+netlify deploy --prod
+```
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+## Pre-build Process
+
+The Netlify deployment includes a pre-build script that:
+
+1. Validates environment variables
+2. Sets up the database connection
+3. Generates the Prisma client
+4. Prepares other necessary configurations
+
+## Troubleshooting
+
+If you encounter issues with the Netlify deployment:
+
+1. Check the Netlify deployment logs
+2. Verify all environment variables are correctly set
+3. Check the database connection status using the health check endpoint
+4. Make sure your Node.js version is compatible (this project uses Node.js 18.x)
+
+## License
+
+MIT
+
+## Netlify Deployment Information
+
+### Server-Side Rendering with Next.js
+
+This project uses server-side rendering with the Next.js App Router, which enables API Routes and Middleware functionality.
+
+Initially, we attempted to use static export (`next export`), but this approach has limitations:
+
+> **⚠️ WARNING**: Using static export disables API Routes, Middleware, and other dynamic features of Next.js.
+>
+> For more information, see the [Next.js documentation on static exports](https://nextjs.org/docs/messages/api-routes-static-export).
+
+Since this application requires API Routes for features like favorites, listings, and reservations, we've configured it for server-side rendering.
+
+### Netlify Configuration
+
+To deploy this project on Netlify:
+
+1. Connect your GitHub repository to Netlify
+2. Configure the following build settings:
+   - Build command: `npm run netlify-build`
+   - Publish directory: `.next`
+3. Add the required environment variables:
+   - `DATABASE_URL`
+   - `NEXTAUTH_SECRET`
+   - `NEXTAUTH_URL`
+   - Other environment variables as specified in `.env.example`
+4. Enable the Next.js Runtime (Netlify will detect and suggest this automatically)
+
+The `@netlify/plugin-nextjs` package is included in the project dependencies and will be used automatically by Netlify.

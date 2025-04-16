@@ -1,7 +1,6 @@
 import { Nunito, Tajawal } from 'next/font/google'
 import type { Metadata } from 'next'
 import { getServerSession } from 'next-auth'
-import { SessionProvider } from 'next-auth/react'
 
 import Navbar from '@/app/components/navbar/Navbar';
 import LoginModal from '@/app/components/modals/LoginModal';
@@ -10,7 +9,7 @@ import SearchModal from '@/app/components/modals/SearchModal';
 import RentModal from '@/app/components/modals/RentModal';
 
 import ToasterProvider from '@/app/providers/ToasterProvider';
-import getCurrentUser from '@/app/actions/getCurrentUser';
+import AuthProvider from '@/app/providers/AuthProvider';
 import ClientOnly from './components/ClientOnly';
 import Footer from './components/Footer';
 
@@ -31,28 +30,25 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const currentUser = await getCurrentUser();
   const session = await getServerSession();
 
   return (
     <html lang="ar" dir="rtl">
       <body className={font.className}>
-        <SessionProvider session={session}>
+        <AuthProvider session={session}>
           <ClientOnly>
             <ToasterProvider />
             <LoginModal />
             <RegisterModal />
             <SearchModal />
             <RentModal />
-            <Navbar currentUser={currentUser} />
+            <Navbar />
           </ClientOnly>
           <div className="pb-20 pt-28">
             {children}
           </div>
-          <ClientOnly>
-            <Footer />
-          </ClientOnly>
-        </SessionProvider>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   )

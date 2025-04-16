@@ -113,3 +113,16 @@ body {
 .hover\:bg-rose-600:hover {
   background-color: #1e40af !important;
 }
+
+/* Menu styles */
+.menu-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: 500;
+  color: #374151;
+}
+
+.menu-item:hover {
+  background-color: #f3f4f6;
+}

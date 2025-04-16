@@ -7,99 +7,102 @@ import Container from './Container';
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-neutral-200 pt-12 pb-6 mt-8 shadow-[0_-2px_5px_rgba(0,0,0,0.1)]">
+    <footer className="bg-white border-t">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* روابط سريعة */}
-          <div>
-            <h3 className="text-xl font-bold mb-4 text-neutral-800">روابط سريعة</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-neutral-600 hover:text-blue-500 transition duration-300">
-                  الصفحة الرئيسية
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-neutral-600 hover:text-blue-500 transition duration-300">
-                  عن الموقع
-                </Link>
-              </li>
-              <li>
-                <Link href="/add-property" className="text-neutral-600 hover:text-blue-500 transition duration-300">
-                  اضف عقارك
-                </Link>
-              </li>
-              <li>
-                <Link href="/testimonials" className="text-neutral-600 hover:text-blue-500 transition duration-300">
-                  قالوا عنا
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* روابط إضافية */}
-          <div>
-            <h3 className="text-xl font-bold mb-4 text-neutral-800">روابط مهمة</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/faq" className="text-neutral-600 hover:text-blue-500 transition duration-300">
-                  الأسئلة الشائعة
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="text-neutral-600 hover:text-blue-500 transition duration-300">
-                  الشروط والأحكام
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="text-neutral-600 hover:text-blue-500 transition duration-300">
-                  سياسة الخصوصية
-                </Link>
-              </li>
-            </ul>
-            
-            {/* قسم تحميل التطبيق */}
-            <div className="mt-8">
-              <h4 className="text-lg font-semibold mb-2 text-neutral-800">حمل التطبيق</h4>
-              <div className="flex space-x-4 space-x-reverse">
-                <Link href="#" className="hover:opacity-80 transition duration-300">
-                  <div className="flex items-center justify-center bg-neutral-800 text-white rounded-lg px-3 py-2">
-                    <FaGooglePlay className="text-xl ml-2" />
-                    <div>
-                      <div className="text-xs">متوفر على</div>
-                      <div className="text-sm font-semibold">Google Play</div>
-                    </div>
-                  </div>
-                </Link>
-                <Link href="#" className="hover:opacity-80 transition duration-300">
-                  <div className="flex items-center justify-center bg-neutral-800 text-white rounded-lg px-3 py-2">
-                    <FaApple className="text-xl ml-2" />
-                    <div>
-                      <div className="text-xs">متوفر على</div>
-                      <div className="text-sm font-semibold">App Store</div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+        <div className="flex flex-col md:flex-row justify-between pt-10 pb-6">
+          <div className="mb-8 md:mb-0">
+            <Link href="/" className="mb-4 block">
+              <Image
+                src="/images/footer-logo.jpg"
+                alt="Logo"
+                width={150}
+                height={50}
+                priority
+                style={{ width: 'auto', height: 'auto' }}
+              />
+            </Link>
+            <p className="text-sm text-gray-600 mb-4">
+              منصة عقارية متكاملة تقدم حلولاً شاملة لبيع وشراء وتأجير العقارات في المملكة العربية السعودية.
+            </p>
+            <div className="flex space-x-4">
+              <Link href="#" className="text-gray-600 hover:text-gray-900">
+                <FaGooglePlay size={24} />
+              </Link>
+              <Link href="#" className="text-gray-600 hover:text-gray-900">
+                <FaApple size={24} />
+              </Link>
             </div>
           </div>
-          
-          {/* الشعار */}
-          <div className="flex items-start justify-end">
-            <Image 
-              src="/images/footer-logo.jpg" 
-              alt="شعار إيواء هوم" 
-              width={200} 
-              height={80} 
-              className="object-contain"
-            />
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900 mb-4">عن المنصة</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900">
+                    من نحن
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900">
+                    اتصل بنا
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privacy" className="text-sm text-gray-600 hover:text-gray-900">
+                    سياسة الخصوصية
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900 mb-4">خدماتنا</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/properties" className="text-sm text-gray-600 hover:text-gray-900">
+                    العقارات
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/agents" className="text-sm text-gray-600 hover:text-gray-900">
+                    الوكلاء
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900">
+                    المدونة
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900 mb-4">المدن</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/cities/riyadh" className="text-sm text-gray-600 hover:text-gray-900">
+                    الرياض
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/cities/jeddah" className="text-sm text-gray-600 hover:text-gray-900">
+                    جدة
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/cities/dammam" className="text-sm text-gray-600 hover:text-gray-900">
+                    الدمام
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        
-        {/* حقوق الملكية */}
-        <div className="border-t border-neutral-200 pt-6 mt-6">
-          <p className="text-center text-neutral-600 text-sm">
-            جميع الحقوق محفوظة © 2025 - موقع إيواء هوم
+
+        <div className="border-t pt-6">
+          <p className="text-center text-xs text-gray-600">
+            &copy; 2024 EiwaaHome. جميع الحقوق محفوظة.
           </p>
         </div>
       </Container>
