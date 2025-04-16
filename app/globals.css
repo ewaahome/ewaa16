@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import mapbox CSS directly */
+@import 'mapbox-gl/dist/mapbox-gl.css';
+@import './styles/mapbox.css';
+
+/* Importar la fuente Tajawal de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+:root {
+  --primary-color: #1E3A8A; /* Azul que coincide con el logo */
+}
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+/* Estilos RTL básicos */
+* {
+  letter-spacing: 0;
+}
+
+body {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Style for leaflet maps (legacy) */
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  z-index: 0 !important;
+}
+
+/* Mapbox specific styles */
+.mapboxgl-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0.5rem;
+}
+
+.mapboxgl-map {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.mapboxgl-ctrl-bottom-right,
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-top-right,
+.mapboxgl-ctrl-top-left {
+  z-index: 1 !important;
+}
+
+/* Added better mobile support */
+@media (max-width: 640px) {
+  .mapboxgl-ctrl-top-right {
+    top: 0 !important;
+    right: 0 !important;
+  }
+  
+  .mapboxgl-ctrl-zoom-in,
+  .mapboxgl-ctrl-zoom-out {
+    padding: 3px !important;
+  }
+}
+
+/* Date picker styles */
+.rdrMonth {
+  width: 100% !important;
+}
+
+.rdrCalendarWrapper {
+  font-size: 16px !important;
+  width: 100% !important;
+}
+
+/* Customizar colores primarios - reemplazar rosa/rojo con azul */
+.bg-rose-500 {
+  background-color: var(--primary-color) !important;
+}
+
+.text-rose-500 {
+  color: var(--primary-color) !important;
+}
+
+.border-rose-500 {
+  border-color: var(--primary-color) !important;
+}
+
+.hover\:bg-rose-500:hover {
+  background-color: var(--primary-color) !important;
+}
+
+.hover\:text-rose-500:hover {
+  color: var(--primary-color) !important;
+}
+
+.hover\:border-rose-500:hover {
+  border-color: var(--primary-color) !important;
+}
+
+/* Para elementos con colores rose-600 */
+.bg-rose-600 {
+  background-color: #1e40af !important; /* Un poco más oscuro */
+}
+
+.hover\:bg-rose-600:hover {
+  background-color: #1e40af !important;
+}
