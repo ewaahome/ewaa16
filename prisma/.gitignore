@@ -1,0 +1,17 @@
+# Prisma specific files
+# Don't ignore schema.prisma!
+# schema.prisma
+
+# Generated Prisma client
+node_modules/@prisma/client
+node_modules/.prisma
+
+# Environment variables
+.env
+*.env
+
+# Generated migration files
+migrations/
+
+# Important files to not ignore
+!generate-client.js 
