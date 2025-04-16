@@ -1,5 +1,5 @@
 [build]
-  command = "bash -c \"npm run build || (node ./generate-client.js && next build)\""
+  command = "npm run build"
   publish = ".next"
   functions = "netlify/functions"
 
@@ -23,6 +23,6 @@
   force = false
 
 [functions]
-  included_files = ["node_modules/.prisma/**/*.node", "prisma/schema.prisma", "schema.prisma", "prisma/**/*", "*.js"]
+  included_files = ["node_modules/.prisma/**/*.node", "prisma/schema.prisma", "schema.prisma", "prisma/**/*"]
   node_bundler = "esbuild"
   external_node_modules = ["@prisma/client", "prisma"] 
