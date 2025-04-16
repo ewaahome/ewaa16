@@ -1,8 +1,7 @@
 [build]
-  command = "npm run netlify-build"
+  command = "npm run build"
   publish = ".next"
   functions = "netlify/functions"
-  environment = { PRISMA_SCHEMA_PATH = "./prisma/schema.prisma" }
 
 [build.environment]
   NEXT_PUBLIC_BASE_URL = "https://eiwaahome.netlify.app"
@@ -12,6 +11,7 @@
   NEXTAUTH_SECRET = "eiwaahomeauthsecretkey2024"
   DATABASE_URL = "mongodb+srv://finaleewa:finaleewa@finaleewa.7eytc2o.mongodb.net/finaleewa?retryWrites=true&w=majority&appName=finaleewa"
   NODE_ENV = "production"
+  PRISMA_SCHEMA_PATH = "./prisma/schema.prisma"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
