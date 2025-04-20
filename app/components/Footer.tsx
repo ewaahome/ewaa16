@@ -3,23 +3,38 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaGooglePlay, FaApple } from 'react-icons/fa';
-import Container from './Container';
+import Container from "./Container";
+import { useState } from 'react';
 
 const Footer = () => {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <footer className="bg-white border-t">
       <Container>
         <div className="flex flex-col md:flex-row justify-between pt-10 pb-6">
           <div className="mb-8 md:mb-0">
             <Link href="/" className="mb-4 block">
-              <Image
-                src="/images/footer-logo.jpg"
-                alt="Logo"
-                width={150}
-                height={50}
-                priority
-                style={{ width: 'auto', height: 'auto' }}
-              />
+              {!imgError ? (
+                <Image
+                  src="/images/footer-logo.jpg"
+                  alt="EiwaaHome Logo"
+                  width={150}
+                  height={50}
+                  priority
+                  onError={() => setImgError(true)}
+                  className="object-contain"
+                />
+              ) : (
+                <Image
+                  src="/images/logo.png"
+                  alt="EiwaaHome Logo"
+                  width={150}
+                  height={50}
+                  priority
+                  className="object-contain"
+                />
+              )}
             </Link>
             <p className="text-sm text-gray-600 mb-4">
               منصة عقارية متكاملة تقدم حلولاً شاملة لبيع وشراء وتأجير العقارات في المملكة العربية السعودية.

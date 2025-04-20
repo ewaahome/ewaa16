@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <style>
+    .text { font-family: Arial, sans-serif; font-weight: bold; fill: #F43F5E; }
+    .house { fill: #F43F5E; }
+  </style>
+  <rect width="200" height="200" fill="white" rx="20" ry="20"/>
+  <path class="house" d="M50,110 L50,160 L150,160 L150,110 L100,70 Z" />
+  <path class="house" d="M75,160 L75,130 L125,130 L125,160 Z" fill="white" />
+  <text x="100" y="190" text-anchor="middle" class="text" font-size="24">إيواء هوم</text>
+</svg>

@@ -1,0 +1,32 @@
+/* Mapbox styles */
+.mapboxgl-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0.5rem;
+}
+
+.mapboxgl-map {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.mapboxgl-ctrl-bottom-right,
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-top-right,
+.mapboxgl-ctrl-top-left {
+  z-index: 1 !important;
+}
+
+/* Added better mobile support */
+@media (max-width: 640px) {
+  .mapboxgl-ctrl-top-right {
+    top: 0 !important;
+    right: 0 !important;
+  }
+  
+  .mapboxgl-ctrl-zoom-in,
+  .mapboxgl-ctrl-zoom-out {
+    padding: 3px !important;
+  }
+} 

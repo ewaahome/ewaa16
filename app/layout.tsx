@@ -1,28 +1,21 @@
-import { Nunito, Tajawal } from 'next/font/google'
-import type { Metadata } from 'next'
-import { getServerSession } from 'next-auth'
-
-import Navbar from '@/app/components/navbar/Navbar';
-import LoginModal from '@/app/components/modals/LoginModal';
-import RegisterModal from '@/app/components/modals/RegisterModal';
-import SearchModal from '@/app/components/modals/SearchModal';
-import RentModal from '@/app/components/modals/RentModal';
-
-import ToasterProvider from '@/app/providers/ToasterProvider';
-import AuthProvider from '@/app/providers/AuthProvider';
-import ClientOnly from './components/ClientOnly';
-import Footer from './components/Footer';
-
+// This is a server component (no 'use client' directive)
 import './globals.css'
+import { Metadata } from 'next/types'
+import { Tajawal } from 'next/font/google'
+import ClientLayout from './components/ClientLayout'
+import { getServerSession } from 'next-auth/next'
+import { authOptions } from './libs/auth'
+import { Suspense } from 'react'
 
-const font = Tajawal({ 
+const tajawal = Tajawal({
   subsets: ['arabic'],
-  weight: ['200', '300', '400', '500', '700', '800', '900'],
-});
+  weight: ['400', '500', '700'],
+  display: 'swap'
+})
 
 export const metadata: Metadata = {
-  title: 'Eiwaa Home',
-  description: 'Eiwaa Home - Your Home in Saudi Arabia',
+  title: 'ايواء هوم',
+  description: 'ايواء هوم'
 }
 
 export default async function RootLayout({
@@ -30,25 +23,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang="ar" dir="rtl">
-      <body className={font.className}>
-        <AuthProvider session={session}>
-          <ClientOnly>
-            <ToasterProvider />
-            <LoginModal />
-            <RegisterModal />
-            <SearchModal />
-            <RentModal />
-            <Navbar />
-          </ClientOnly>
-          <div className="pb-20 pt-28">
+      <body className={tajawal.className}>
+        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading...</div>}>
+          <ClientLayout session={session}>
             {children}
-          </div>
-          <Footer />
-        </AuthProvider>
+          </ClientLayout>
+        </Suspense>
       </body>
     </html>
   )

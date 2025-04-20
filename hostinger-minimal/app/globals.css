@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import mapbox CSS directly */
+@import 'mapbox-gl/dist/mapbox-gl.css';
+@import './styles/mapbox.css';
+
+/* Importar la fuente Tajawal de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+:root {
+  --primary-color: #1E3A8A; /* Azul que coincide con el logo */
+}
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+/* Estilos RTL básicos */
+* {
+  letter-spacing: 0;
+}
+
+body {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Style for leaflet maps (legacy) */
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  z-index: 0 !important;
+}
+
+/* Mapbox specific styles */
+.mapboxgl-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0.5rem;
+}
+
+.mapboxgl-map {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.mapboxgl-ctrl-bottom-right,
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-top-right,
+.mapboxgl-ctrl-top-left {
+  z-index: 1 !important;
+}
+
+/* Added better mobile support */
+@media (max-width: 640px) {
+  .mapboxgl-ctrl-top-right {
+    top: 0 !important;
+    right: 0 !important;
+  }
+  
+  .mapboxgl-ctrl-zoom-in,
+  .mapboxgl-ctrl-zoom-out {
+    padding: 3px !important;
+  }
+}
+
+/* Date picker styles */
+.rdrMonth {
+  width: 100% !important;
+}
+
+.rdrCalendarWrapper {
+  font-size: 16px !important;
+  width: 100% !important;
+}
+
+/* Customizar colores primarios - reemplazar rosa/rojo con azul */
+.bg-rose-500 {
+  background-color: var(--primary-color) !important;
+}
+
+.text-rose-500 {
+  color: var(--primary-color) !important;
+}
+
+.border-rose-500 {
+  border-color: var(--primary-color) !important;
+}
+
+.hover\:bg-rose-500:hover {
+  background-color: var(--primary-color) !important;
+}
+
+.hover\:text-rose-500:hover {
+  color: var(--primary-color) !important;
+}
+
+.hover\:border-rose-500:hover {
+  border-color: var(--primary-color) !important;
+}
+
+/* Para elementos con colores rose-600 */
+.bg-rose-600 {
+  background-color: #1e40af !important; /* Un poco más oscuro */
+}
+
+.hover\:bg-rose-600:hover {
+  background-color: #1e40af !important;
+}
+
+/* Menu styles */
+.menu-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: 500;
+  color: #374151;
+}
+
+.menu-item:hover {
+  background-color: #f3f4f6;
+}
+
+/* Add new mobile responsiveness styles to the end of the file */
+
+@media (max-width: 640px) {
+  /* Increase tap target sizes for better mobile UX */
+  button, 
+  [role="button"],
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Ensure proper scrolling on iOS */
+  html, body {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Adjust font sizes for better readability on smaller screens */
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  /* Improve touch targets for form inputs */
+  input, 
+  select, 
+  textarea {
+    font-size: 16px; /* Prevents iOS from zooming in on focus */
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+  
+  /* Adjust modal height on mobile */
+  .modal-mobile-height {
+    max-height: 90vh;
+  }
+  
+  /* Fix for iOS momentum scrolling */
+  .momentum-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Fix for notch on newer iPhones */
+@supports (padding: max(0px)) {
+  .fixed-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  
+  .fixed-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+}
+
+/* Custom loader for mobile to show loading states */
+.mobile-loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top-color: #F43F5E;
+  animation: mobile-spin 1s linear infinite;
+}
+
+@keyframes mobile-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mobile menu improvements */
+.mobile-menu-item {
+  width: 100%;
+  text-align: right;
+  white-space: normal;
+  word-break: keep-all;
+  display: block;
+}
+
+/* Additional mobile menu improvements */
+@media (max-width: 768px) {
+  /* Ensure user menu has enough space */
+  .user-menu-dropdown {
+    min-width: 80vw;
+    max-width: 90vw;
+    right: 0;
+    left: auto;
+  }
+  
+  /* Improved touch targets */
+  .menu-item {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 12px 16px;
+  }
+  
+  /* Fix for menu positioning */
+  .menu-container {
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

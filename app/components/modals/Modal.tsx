@@ -90,11 +90,13 @@ const Modal: React.FC<ModalProps> = ({
           md:w-4/6
           lg:w-3/6
           xl:w-2/5
-          my-6
+          my-2
+          md:my-6
           mx-auto 
           h-full 
           lg:h-auto
           md:h-auto
+          max-h-[95vh]
           "
         >
           {/*content*/}
@@ -120,13 +122,15 @@ const Modal: React.FC<ModalProps> = ({
               bg-white 
               outline-none 
               focus:outline-none
+              overflow-hidden
             "
             >
               {/*header*/}
               <div className="
                 flex 
                 items-center 
-                p-6
+                p-4
+                md:p-6
                 rounded-t
                 justify-center
                 relative
@@ -135,33 +139,46 @@ const Modal: React.FC<ModalProps> = ({
               >
                 <button
                   className="
-                    p-1
+                    p-2
                     border-0 
                     hover:opacity-70
                     transition
                     absolute
-                    left-9
+                    left-2
+                    md:left-9
+                    rounded-full
+                    hover:bg-neutral-100
                   "
                   onClick={handleClose}
+                  aria-label="Close"
                 >
                   <IoMdClose size={18} />
                 </button>
-                <div className="text-lg font-semibold">
+                <div className="text-base md:text-lg font-semibold">
                   {title}
                 </div>
               </div>
               {/*body*/}
-              <div className="relative p-6 flex-auto">
+              <div className="
+                relative 
+                p-4 
+                md:p-6 
+                flex-auto 
+                overflow-y-auto
+                max-h-[calc(95vh-180px)]
+                md:max-h-[60vh]
+              ">
                 {body}
               </div>
               {/*footer*/}
-              <div className="flex flex-col gap-2 p-6">
+              <div className="flex flex-col gap-2 p-4 md:p-6 border-t-[1px]">
                 <div 
                   className="
                     flex 
                     flex-row 
                     items-center 
-                    gap-4 
+                    gap-2
+                    md:gap-4
                     w-full
                   "
                 >

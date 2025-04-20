@@ -7,6 +7,14 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 
 import prisma from "@/app/libs/prismadb"
 
+// Define a fixed secret key to resolve JWT decryption issues
+const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET || "this_is_a_secure_secret_key_for_development_do_not_use_in_production";
+
+// Set NEXTAUTH_SECRET environment variable to ensure it's consistent
+if (typeof process.env.NEXTAUTH_SECRET !== 'string') {
+  process.env.NEXTAUTH_SECRET = NEXTAUTH_SECRET;
+}
+
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -55,8 +63,27 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: '/',
   },
+  debug: process.env.NODE_ENV === 'development',
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  jwt: {
+    // Ensure consistent JWT settings to prevent decryption issues
+    secret: NEXTAUTH_SECRET,
+    maxAge: 60 * 60 * 24 * 30, // 30 days
+  },
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
+  },
+  // Ensure secret is set
+  secret: NEXTAUTH_SECRET,
 } 

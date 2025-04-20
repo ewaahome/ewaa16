@@ -1,0 +1,15 @@
+{
+  "name": "netlify-plugin-prisma-provider",
+  "version": "1.0.0",
+  "description": "Netlify build plugin for Prisma integration",
+  "main": "index.js",
+  "keywords": [
+    "netlify",
+    "netlify-plugin",
+    "prisma",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+} 

@@ -1,0 +1,20 @@
+# Prisma specific files to ignore
+migrations/
+*.db
+.env
+
+# Generated files
+node_modules/
+
+# Logs
+*.log
+
+# Don't ignore schema.prisma
+!schema.prisma
+
+# Temporary files
+*.tmp
+*.temp
+
+# Keep Prisma configuration
+!generate-client.js 

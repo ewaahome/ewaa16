@@ -104,7 +104,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
       onClick={() => router.push(`/listings/${data.id}`)} 
       className="col-span-1 cursor-pointer group"
     >
-      <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col gap-1 sm:gap-2 w-full">
         <div 
           className="
             aspect-square 
@@ -138,21 +138,21 @@ const ListingCard: React.FC<ListingCardProps> = ({
             />
           </div>
         </div>
-        <div className="font-medium text-base text-neutral-900 line-clamp-1 mt-2 text-center">
+        <div className="font-medium text-sm sm:text-base text-neutral-900 line-clamp-1 mt-1 sm:mt-2 text-center">
           {data.title || 'عقار بدون عنوان'}
         </div>
-        <div className="font-light text-xs text-neutral-500 mt-1 text-center">
+        <div className="font-light text-2xs sm:text-xs text-neutral-500 mt-0.5 sm:mt-1 text-center">
           {location?.arabicLabel || location?.label || ''}{location?.region ? ` - ${location?.region}` : ''}
         </div>
-        <div className="font-light text-xs text-neutral-600 mt-1 text-center">
+        <div className="font-light text-2xs sm:text-xs text-neutral-600 mt-0.5 sm:mt-1 text-center">
           {reservationDate || translatedCategory}
         </div>
-        <div className="flex flex-row items-center gap-1 font-semibold mt-2">
-          <div className="text-rose-500">
+        <div className="flex flex-row items-center gap-1 font-semibold mt-1 sm:mt-2 justify-center">
+          <div className="text-rose-500 text-sm sm:text-base">
             ر.س. {price}
           </div>
           {!reservation && (
-            <div className="font-light text-neutral-600 text-sm">/ الليلة</div>
+            <div className="font-light text-neutral-600 text-2xs sm:text-sm">/ الليلة</div>
           )}
         </div>
         {onAction && actionLabel && (

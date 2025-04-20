@@ -1,0 +1,29 @@
+'use client';
+
+import Container from "./components/Container";
+import ClientOnly from "./components/ClientOnly";
+
+export default function Home() {
+  return (
+    <ClientOnly>
+      <Container>
+        <div className="min-h-screen pb-20 pt-10 flex flex-col items-center justify-center">
+          <h1 className="text-3xl font-bold text-center mb-6">Welcome to Eiwaa Home</h1>
+          <p className="text-lg text-center text-gray-600 mb-10">Find your perfect place to stay in Saudi Arabia</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="h-40 bg-gray-200 rounded-md mb-4"></div>
+              <h2 className="text-xl font-semibold">شقة فاخرة في الرياض</h2>
+              <p className="text-gray-600">500 ريال / الليلة</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="h-40 bg-gray-200 rounded-md mb-4"></div>
+              <h2 className="text-xl font-semibold">فيلا في جدة</h2>
+              <p className="text-gray-600">1200 ريال / الليلة</p>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </ClientOnly>
+  );
+} 

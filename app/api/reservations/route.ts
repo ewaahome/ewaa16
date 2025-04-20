@@ -1,44 +1,17 @@
-import { NextResponse } from "next/server";
+/**
+ * @deprecated This file is maintained for backward compatibility. 
+ * Please use the modular version at app/modules/reservations/api/route.ts instead.
+ */
 
-import prisma from "@/app/libs/prismadb";
-import getCurrentUser from "@/app/actions/getCurrentUser";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(
-  request: Request, 
-) {
-  const currentUser = await getCurrentUser();
-
-  if (!currentUser) {
-    return NextResponse.error();
-  }
-
-  const body = await request.json();
-  const { 
-    listingId,
-    startDate,
-    endDate,
-    totalPrice
-   } = body;
-
-   if (!listingId || !startDate || !endDate || !totalPrice) {
-    return NextResponse.error();
-  }
-
-  const listingAndReservation = await prisma.listing.update({
-    where: {
-      id: listingId
-    },
-    data: {
-      reservations: {
-        create: {
-          userId: currentUser.id,
-          startDate,
-          endDate,
-          totalPrice,
-        }
-      }
-    }
+export async function POST(request: NextRequest) {
+  // Forward the request to the modular route
+  const modularResponse = await fetch(new URL('/api/modules/reservations', request.url), {
+    method: 'POST',
+    headers: request.headers,
+    body: request.body
   });
-
-  return NextResponse.json(listingAndReservation);
+  
+  return modularResponse;
 }

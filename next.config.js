@@ -5,7 +5,7 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   swcMinify: true,
-  trailingSlash: true,
+  trailingSlash: false,
   images: {
     domains: [
       'res.cloudinary.com', 
@@ -88,15 +88,15 @@ const nextConfig = {
   },
   env: {
     DATABASE_URL: process.env.DATABASE_URL,
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || "this_is_a_secure_secret_key_for_development_do_not_use_in_production",
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL || "http://localhost:3000",
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     CLOUDINARY_URL: process.env.CLOUDINARY_URL,
     NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET: process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
-    NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
-    NEXT_PUBLIC_MAPBOX_STYLE: process.env.NEXT_PUBLIC_MAPBOX_STYLE
+    NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || "pk.eyJ1IjoibmFqaXgiLCJhIjoiY2x0MndwNjVuMHZtYzJqcno4M2E3ejlmZyJ9.8TdM1VtE4z9PnvOA21Y6-w",
+    NEXT_PUBLIC_MAPBOX_STYLE: process.env.NEXT_PUBLIC_MAPBOX_STYLE || "mapbox://styles/mapbox/streets-v11"
   },
 }
 

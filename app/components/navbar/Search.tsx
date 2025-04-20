@@ -13,10 +13,10 @@ const Search = () => {
   const params = useSearchParams();
   const { getByValue } = useSaudiCities();
 
-  const  locationValue = params?.get('locationValue'); 
-  const  startDate = params?.get('startDate');
-  const  endDate = params?.get('endDate');
-  const  guestCount = params?.get('guestCount');
+  const locationValue = params?.get('locationValue'); 
+  const startDate = params?.get('startDate');
+  const endDate = params?.get('endDate');
+  const guestCount = params?.get('guestCount');
 
   const locationLabel = useMemo(() => {
     if (locationValue) {
@@ -57,7 +57,8 @@ const Search = () => {
         border-[1px] 
         w-full 
         md:w-auto 
-        py-2 
+        py-1
+        md:py-2 
         rounded-full 
         shadow-sm 
         hover:shadow-md 
@@ -75,9 +76,12 @@ const Search = () => {
       >
         <div 
           className="
-            text-sm 
+            text-xs
+            md:text-sm 
             font-semibold 
-            px-6
+            px-3
+            md:px-6
+            truncate
           "
         >
           {locationLabel}
@@ -86,32 +90,39 @@ const Search = () => {
           className="
             hidden 
             sm:block 
-            text-sm 
+            text-xs
+            md:text-sm 
             font-semibold 
-            px-6 
+            px-3
+            md:px-6 
             border-x-[1px] 
             flex-1 
             text-center
+            whitespace-nowrap
           "
         >
           {durationLabel}
         </div>
         <div 
           className="
-            text-sm 
-            pl-6 
+            text-xs
+            md:text-sm 
+            pl-3
+            md:pl-6 
             pr-2 
             text-gray-600 
             flex 
             flex-row 
             items-center 
-            gap-3
+            gap-1
+            md:gap-3
           "
         >
-          <div className="hidden sm:block">{guestLabel}</div>
+          <div className="hidden sm:block truncate">{guestLabel}</div>
           <div 
             className="
-              p-2 
+              p-1.5 
+              md:p-2 
               bg-rose-500 
               rounded-full 
               text-white

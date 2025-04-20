@@ -1,39 +1,9 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/app/libs/auth"
+/**
+ * @deprecated This file is maintained for backward compatibility. 
+ * Please use the modular version at app/modules/auth/actions/getCurrentUser.ts instead.
+ */
 
-import prisma from "@/app/libs/prismadb"
+import getCurrentUser from "@/app/modules/auth/actions/getCurrentUser";
 
-export async function getSession() {
-  return await getServerSession(authOptions)
-}
-
-export default async function getCurrentUser() {
-  try {
-    const session = await getSession();
-
-    if (!session?.user?.email) {
-      return null;
-    }
-
-    const currentUser = await prisma.user.findUnique({
-      where: {
-        email: session.user.email as string,
-      }
-    });
-
-    if (!currentUser) {
-      return null;
-    }
-
-    return {
-      ...currentUser,
-      createdAt: currentUser.createdAt.toISOString(),
-      updatedAt: currentUser.updatedAt.toISOString(),
-      emailVerified: 
-        currentUser.emailVerified?.toISOString() || null,
-    };
-  } catch (error: any) {
-    return null;
-  }
-}
+export default getCurrentUser;
 

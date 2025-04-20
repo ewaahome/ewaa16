@@ -126,3 +126,109 @@ body {
 .menu-item:hover {
   background-color: #f3f4f6;
 }
+
+/* Add new mobile responsiveness styles to the end of the file */
+
+@media (max-width: 640px) {
+  /* Increase tap target sizes for better mobile UX */
+  button, 
+  [role="button"],
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Ensure proper scrolling on iOS */
+  html, body {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Adjust font sizes for better readability on smaller screens */
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  /* Improve touch targets for form inputs */
+  input, 
+  select, 
+  textarea {
+    font-size: 16px; /* Prevents iOS from zooming in on focus */
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+  
+  /* Adjust modal height on mobile */
+  .modal-mobile-height {
+    max-height: 90vh;
+  }
+  
+  /* Fix for iOS momentum scrolling */
+  .momentum-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Fix for notch on newer iPhones */
+@supports (padding: max(0px)) {
+  .fixed-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  
+  .fixed-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+}
+
+/* Custom loader for mobile to show loading states */
+.mobile-loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top-color: #F43F5E;
+  animation: mobile-spin 1s linear infinite;
+}
+
+@keyframes mobile-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mobile menu improvements */
+.mobile-menu-item {
+  width: 100%;
+  text-align: right;
+  white-space: normal;
+  word-break: keep-all;
+  display: block;
+}
+
+/* Additional mobile menu improvements */
+@media (max-width: 768px) {
+  /* Ensure user menu has enough space */
+  .user-menu-dropdown {
+    min-width: 80vw;
+    max-width: 90vw;
+    right: 0;
+    left: auto;
+  }
+  
+  /* Improved touch targets */
+  .menu-item {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 12px 16px;
+  }
+  
+  /* Fix for menu positioning */
+  .menu-container {
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

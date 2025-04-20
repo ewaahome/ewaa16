@@ -64,12 +64,12 @@ const CityCircle: React.FC<CityCircleProps> = ({
           relative
           rounded-full 
           overflow-hidden
-          w-24
-          h-24
-          md:w-28
-          md:h-28
-          lg:w-32
-          lg:h-32
+          w-20
+          h-20
+          md:w-24
+          md:h-24
+          lg:w-28
+          lg:h-28
           transition
           duration-300
           border-2

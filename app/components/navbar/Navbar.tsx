@@ -40,31 +40,45 @@ const Navbar = () => {
 
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
-      <div className="py-4 border-b-[1px]">
+      <div className="py-3 md:py-4 border-b-[1px]">
         <Container>
-          <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
+          <div className="flex flex-row items-center justify-between gap-1 md:gap-3">
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
                 <img 
                   src="https://i.ibb.co/nN0RnFRM/image-removebg-preview.png"
                   alt="إيواء هوم"
-                  className="h-12 w-auto object-contain"
+                  className="h-8 md:h-12 w-auto object-contain"
                 />
               </Link>
             </div>
             
-            <div className="flex-1 px-4">
+            <div className="flex-1 px-2 md:px-4">
               <Search />
             </div>
             
-            <div className="flex flex-row items-center gap-3">
-              <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
-                <div onClick={() => router.push('/')}>الرئيسية</div>
+            <div className="flex flex-row items-center gap-1 md:gap-3">
+              <div 
+                onClick={() => router.push('/')}
+                className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+              >
+                الرئيسية
               </div>
-              <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
-                <div onClick={() => router.push('/listings')}>العقارات</div>
+              <div 
+                onClick={() => router.push('/listings')}
+                className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+              >
+                العقارات
               </div>
-              <UserMenu currentUser={currentUser} />
+              <div 
+                onClick={onRent}
+                className="md:hidden text-sm font-semibold py-2 px-3 rounded-full bg-rose-500 text-white hover:bg-rose-600 transition cursor-pointer"
+              >
+                +
+              </div>
+              <div className="relative">
+                <UserMenu currentUser={currentUser} />
+              </div>
             </div>
           </div>
         </Container>

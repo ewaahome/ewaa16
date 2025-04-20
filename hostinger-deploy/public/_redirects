@@ -1,0 +1,6 @@
+# Redirects for Next.js deployment
+# API routes to Netlify Functions
+/api/*  /.netlify/functions/:splat  200
+
+# Let Next.js handle all routing
+/*    /.netlify/functions/next_handler    200 

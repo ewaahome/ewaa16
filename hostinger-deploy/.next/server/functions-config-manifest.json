@@ -1,0 +1,1 @@
+{"version":1,"functions":{"/api/cloudinary-image":{},"/api/auth/[...nextauth]":{},"/api/favorites/[listingId]":{},"/api/listings/[listingId]":{}}}

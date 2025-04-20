@@ -1,0 +1,13 @@
+{
+  "name": "eiwaa-home-static",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static website for Eiwaa Home",
+  "scripts": {
+    "start": "echo 'This is a static site, no server needed.'"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.x"
+  }
+}

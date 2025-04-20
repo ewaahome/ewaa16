@@ -12,13 +12,18 @@ const CitiesSection = () => {
   const { getAll } = useSaudiCities();
   const [cities, setCities] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     try {
+      console.log("CitiesSection: Loading cities...");
       const allCities = getAll();
+      console.log("CitiesSection: Cities loaded:", allCities?.length || 0);
       setCities(allCities || []);
-    } catch (error) {
-      console.error("Error loading cities:", error);
+      setError(null);
+    } catch (err) {
+      console.error("Error loading cities:", err);
+      setError(String(err));
       setCities([]);
     } finally {
       setIsLoading(false);
@@ -37,27 +42,52 @@ const CitiesSection = () => {
     );
   }
 
+  if (error) {
+    return (
+      <Container>
+        <div className="pt-6 pb-6 flex flex-col items-center">
+          <h2 className="text-xl font-semibold text-red-500 mb-4 text-center">
+            حدث خطأ أثناء تحميل المدن
+          </h2>
+          <p className="text-sm text-red-400">{error}</p>
+        </div>
+      </Container>
+    );
+  }
+
+  if (!cities || cities.length === 0) {
+    return (
+      <Container>
+        <div className="pt-6 pb-6 flex flex-col items-center">
+          <h2 className="text-xl font-semibold text-neutral-800 mb-4 text-center">
+            لا توجد مدن متاحة حالياً
+          </h2>
+        </div>
+      </Container>
+    );
+  }
+
   return (
     <Container>
-      <div className="pt-6 pb-2">
-        <h2 className="text-xl font-semibold text-neutral-800 mb-4 text-center">
-          استكشف المدن السعودية
-        </h2>
-      </div>
-      <div
-        className="
-          pt-2
-          pb-6
-          flex 
-          flex-row 
-          items-center 
-          justify-center
-          overflow-x-auto
-          gap-6
-        "
-      >
-        {cities.length > 0 ? (
-          cities.map((city) => (
+      <div className="flex flex-col w-full">
+        <div className="w-full py-4">
+          <h2 className="text-xl font-semibold text-neutral-800 text-center">
+            تصفح حسب المدينة
+          </h2>
+        </div>
+        <div
+          className="
+            w-full
+            flex 
+            flex-row 
+            items-center 
+            justify-center
+            overflow-x-auto
+            gap-4
+            py-4
+          "
+        >
+          {cities.map((city) => (
             <CityCircle
               key={city.id}
               id={city.value}
@@ -65,12 +95,8 @@ const CitiesSection = () => {
               image={city.image}
               selected={locationValue === city.value}
             />
-          ))
-        ) : (
-          <div className="text-center text-neutral-500">
-            لا توجد مدن متاحة حالياً
-          </div>
-        )}
+          ))}
+        </div>
       </div>
     </Container>
   );

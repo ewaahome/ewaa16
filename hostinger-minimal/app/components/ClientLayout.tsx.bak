@@ -1,0 +1,34 @@
+'use client';
+
+import AuthProvider from '@/app/providers/AuthProvider';
+import ClientOnly from './ClientOnly';
+import ToasterProvider from '@/app/providers/ToasterProvider';
+import LoginModal from '@/app/components/modals/LoginModal';
+import RegisterModal from '@/app/components/modals/RegisterModal';
+import SearchModal from '@/app/components/modals/SearchModal';
+import RentModal from '@/app/components/modals/RentModal';
+import Navbar from '@/app/components/navbar/Navbar';
+import Footer from '@/app/components/Footer';
+import { Session } from 'next-auth';
+
+interface ClientLayoutProps {
+  children: React.ReactNode;
+  session: Session | null;
+}
+
+export default function ClientLayout({ children, session }: ClientLayoutProps) {
+  return (
+    <AuthProvider session={session}>
+      <ClientOnly>
+        <ToasterProvider />
+        <LoginModal />
+        <RegisterModal />
+        <SearchModal />
+        <RentModal />
+        <Navbar />
+      </ClientOnly>
+      {children}
+      <Footer />
+    </AuthProvider>
+  );
+} 
