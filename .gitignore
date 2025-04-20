@@ -70,3 +70,9 @@ netlify/functions/server/
 .netlify
 .next/
 hostinger-deploy.zip
+hostinger-deploy/
+*.zip
+*.zip
+hostinger-deploy/
+*.zip
+*.zip
