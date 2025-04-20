@@ -68,3 +68,5 @@ netlify/functions/server/
 
 # Local Netlify folder
 .netlify
+.next/
+hostinger-deploy.zip
